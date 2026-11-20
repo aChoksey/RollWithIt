@@ -26,6 +26,8 @@ public class PlayerMovement : MonoBehaviour
 
     private void Move(GameObject collisionObject)
     {
+        if (collisionObject == null) return;
+        
         if (collisionObject.CompareTag("Ground"))
         {
             rigidbody2D.AddForce(moveDirection * GameParameters.playerSpeed);
