@@ -1,9 +1,18 @@
 using UnityEngine;
 using System.Collections.Generic;
+using UnityEngine.InputSystem;
 
 public class DeleteObject : MonoBehaviour
 {
-    public Stack<GameObject> placedObjects;
+    private Stack<GameObject> placedObjects = new Stack<GameObject>();
+
+    public void Update()
+    {
+        if (Keyboard.current.uKey.wasPressedThisFrame)
+        {
+            DeleteFromStack();
+        }
+    }
 
     public void AddToStack(GameObject obj)
     {
@@ -18,6 +27,6 @@ public class DeleteObject : MonoBehaviour
             Destroy(deletedObject);
         }
     }
-
+    
 
 }

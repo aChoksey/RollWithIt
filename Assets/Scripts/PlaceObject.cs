@@ -8,7 +8,7 @@ public class PlaceObject : MonoBehaviour
     public GameObject blockObject;
     public GameObject trampolineObject;
     public GameObject rampObject;
-    public DeleteObject deleteObject;
+    public DeleteObject objectStack;
     
     private Vector2  screenPosition;
     private Vector2 mousePosition;
@@ -20,8 +20,8 @@ public class PlaceObject : MonoBehaviour
     {
         if (Mouse.current.leftButton.wasPressedThisFrame)
         {
-            Place(currentObject);
-            deleteObject.AddToStack(currentObject);
+            GameObject placed = Place(currentObject);
+            objectStack.AddToStack(placed);
         }
 
         if (Mouse.current.rightButton.wasPressedThisFrame)
@@ -52,12 +52,14 @@ public class PlaceObject : MonoBehaviour
         }
     }
 
-    private void Place(GameObject currentObject)
+    private GameObject Place(GameObject currentObject)
     {
         //print("Placed " + currentObject);
         screenPosition = Mouse.current.position.ReadValue();
         mousePosition = Camera.main.ScreenToWorldPoint(screenPosition);
-        Instantiate(currentObject, mousePosition, Quaternion.identity);
+        GameObject placed = Instantiate(currentObject, mousePosition, Quaternion.identity);
+
+        return placed;
     }
     //method on click
         //pick a point on screen
