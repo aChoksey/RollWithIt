@@ -1,5 +1,6 @@
 using UnityEngine;
 using UnityEngine.InputSystem;
+using System.Collections.Generic;
 
 public class PlaceObject : MonoBehaviour
 {
@@ -7,17 +8,20 @@ public class PlaceObject : MonoBehaviour
     public GameObject blockObject;
     public GameObject trampolineObject;
     public GameObject rampObject;
+    public DeleteObject deleteObject;
     
     private Vector2  screenPosition;
     private Vector2 mousePosition;
     private int[] shapesArray =  new int[GameParameters.numShapesAvailable];
     private int shapeIndex = 0;
+    
 
     public void Update()
     {
         if (Mouse.current.leftButton.wasPressedThisFrame)
         {
             Place(currentObject);
+            deleteObject.AddToStack(currentObject);
         }
 
         if (Mouse.current.rightButton.wasPressedThisFrame)
